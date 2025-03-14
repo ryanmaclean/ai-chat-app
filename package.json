@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "serve": "node server.js",
-    "security:scan": "npx @datadog/datadog-ci sbom upload --config datadog-sca.yaml"
+    "security:scan": "datadog-ci sbom generate . && datadog-ci sbom upload . --config datadog-sca.yaml"
   },
   "dependencies": {
     "@datadog/browser-logs": "^4.50.1",

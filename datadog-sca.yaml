@@ -1,4 +1,4 @@
-api_key: YOURKEYHERE
+api_key: ${DD_API_KEY}
 site: datadoghq.com
 project_name: ai-chat-app
 project_version: 1.0.0 

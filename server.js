@@ -5,11 +5,15 @@ import path from 'path';
 import fs from 'fs';
 import fetch from 'node-fetch';
 import { setupCSP } from './server-middleware.js';
+import helmet from 'helmet';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function createServer() {
   const app = express();
+  
+  // Add helmet middleware for security headers
+  app.use(helmet());
   
   // Parse JSON request bodies
   app.use(express.json());

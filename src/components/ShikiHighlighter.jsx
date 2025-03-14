@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getHighlighter } from 'shiki';
+import DOMPurify from 'dompurify';
 
 const ShikiHighlighter = ({ language, children, ...props }) => {
   const [highlightedCode, setHighlightedCode] = useState('');
@@ -41,15 +42,13 @@ const ShikiHighlighter = ({ language, children, ...props }) => {
   }
 
   return (
-    <div 
-      className="shiki-wrapper"
-      style={{
-        borderRadius: '0.375rem',
-        overflow: 'hidden',
-      }}
-      dangerouslySetInnerHTML={{ __html: highlightedCode }}
-      {...props}
-    />
+    <div className="shiki-code-container">
+      {React.createElement('div', {
+        dangerouslySetInnerHTML: {
+          __html: DOMPurify.sanitize(highlightedCode)
+        }
+      })}
+    </div>
   );
 };
 
