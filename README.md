@@ -1,4 +1,4 @@
-# AI Chat App
+# (DEMO!) AI Chat App
 
 A modern React application for interacting with AI models through the OpenAI API, featuring a glassomorphic UI design.
 
