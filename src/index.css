@@ -1,0 +1,349 @@
+@import './fonts.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode variables with improved contrast */
+  --background-start: #f8fafc;
+  --background-end: #e2e8f0;
+  --text-color: #1e293b; /* Dark enough for contrast on light bg */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(148, 163, 184, 0.3);
+  --primary-color: #2563eb; /* Darker blue for better contrast */
+  --secondary-color: #475569;
+  --accent-color: #7c3aed;
+  --error-color: #dc2626;
+  --success-color: #16a34a;
+  --base-font-size: 16px;
+  --transition-speed: 0.2s;
+}
+
+.dark {
+  /* Dark mode variables with improved contrast */
+  --background-start: #0f172a;
+  --background-end: #1e293b;
+  --text-color: #f1f5f9; /* Lighter for better contrast on dark bg */
+  --glass-bg: rgba(17, 25, 40, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --primary-color: #60a5fa; /* Lighter blue for better contrast */
+  --secondary-color: #cbd5e1;
+  --accent-color: #a78bfa;
+  --error-color: #f87171;
+  --success-color: #4ade80;
+}
+
+html {
+  font-size: var(--base-font-size);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, var(--background-start), var(--background-end));
+  color: var(--text-color);
+  min-height: 100vh;
+  background-image: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: background var(--transition-speed) ease;
+}
+
+/* Utility classes */
+@layer components {
+  .glass-card {
+    @apply bg-opacity-75 backdrop-blur-md border rounded-lg p-4;
+    background-color: var(--glass-bg);
+    border-color: var(--glass-border);
+    transition: background-color var(--transition-speed) ease, 
+                border-color var(--transition-speed) ease;
+    color: var(--text-color);
+  }
+  
+  .btn-submit {
+    @apply bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed;
+    transition: background-color var(--transition-speed) ease;
+  }
+  
+  .typing-indicator {
+    @apply flex items-center;
+  }
+  
+  .typing-indicator span {
+    @apply h-2 w-2 mx-0.5 bg-gray-400 rounded-full inline-block;
+    animation: typing 1.4s ease-in-out infinite;
+  }
+}
+
+/* Animations */
+@media (prefers-reduced-motion: reduce), 
+       (--reduced-motion: true) {
+  .typing-indicator span {
+    animation: none;
+  }
+  
+  * {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+}
+
+@keyframes typing {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Code blocks */
+pre, code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.result-box {
+  @apply bg-black/50 rounded-md p-4;
+}
+
+.token-info,
+.approx-cost,
+.response-time,
+.model-used {
+  @apply text-sm mt-1;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+/* Enable word-wrap for code blocks */
+pre, code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Glassomorphic card style inspired by Dribbble and Print Magazine aesthetics */
+.glass-card {
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 32px 0 rgba(60, 60, 100, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Input area styling */
+.input-area {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  resize: vertical;
+}
+
+/* Button styling with a new gradient inspired by Digital Lavender and Teal */
+.btn-submit {
+  background: linear-gradient(45deg, #CEB4FF, #77E5D4);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-submit:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(119, 229, 212, 0.4);
+}
+
+.btn-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Floating hint styling */
+.floating-hint {
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* Ensure tokens, cost, and response time are left aligned */
+.token-count,
+.cost,
+.response-time {
+  display: block;
+  width: 100%;
+  text-align: left !important;
+  align-self: flex-start;
+}
+
+/* Additional styling for headers and text to enhance magazine-like aesthetics */
+h2 {
+  color: #E0E5FF;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.result-box {
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.token-info,
+.approx-cost,
+.response-time {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  color: #ccc;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.chat-message {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.chat-message .avatar {
+  margin-right: 1rem;
+}
+
+.chat-message .message {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #1e293b;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  max-width: 80%;
+}
+
+.chat-message.user .message {
+  background-color: rgba(219, 234, 254, 0.95);
+  color: #1e293b;
+}
+
+.chat-message.assistant .message {
+  background-color: white;
+}
+
+.dark .chat-message .message {
+  background-color: rgba(30, 41, 59, 0.95);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .chat-message.user .message {
+  background-color: rgba(30, 58, 138, 0.5);
+  color: #f1f5f9;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Ensure proper contrast for buttons */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white; /* Always white text on primary buttons for contrast */
+}
+
+/* Ensure proper contrast for inputs */
+input, textarea {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  border: 1px solid var(--glass-border);
+}
+
+.dark input, .dark textarea {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Add these to your index.css */
+*:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.dark *:focus-visible {
+  outline-color: var(--primary-color);
+}
+
+/* Ensure buttons have visible focus states */
+button:focus-visible, 
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--background-start), 0 0 0 4px var(--primary-color);
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

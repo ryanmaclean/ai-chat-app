@@ -1,0 +1,4 @@
+api_key: YOURKEYHERE
+site: datadoghq.com
+project_name: ai-chat-app
+project_version: 1.0.0 

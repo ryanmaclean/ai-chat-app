@@ -1,0 +1,34 @@
+name: Update SBOM
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Run every Monday at midnight
+
+jobs:
+  update-sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Generate SBOM
+        run: npm run sbom:generate
+      
+      - name: Run security scan
+        run: npm run security:scan
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'chore: update SBOM and security scan'
+          title: 'Update SBOM and security scan'
+          body: 'This PR updates the Software Bill of Materials (SBOM) and runs a security scan.'
+          branch: 'chore/update-sbom' 
